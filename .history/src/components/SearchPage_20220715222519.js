@@ -1,0 +1,70 @@
+import React,{useEffect, useState} from "react";
+import {connect} from 'react-redux';
+import { getSearchResult } from "../actions";
+
+
+
+
+
+function SearchPage({searchResults, getSearchResult}){
+    const [text, setText] = useState();
+
+    handleChange = event => setText(event.target.value)
+
+    handleSubmit = event => {
+        event.preventDefault()
+        let url = "https://hn.algolia.com/api/v1/search?query=" + text;
+        getSearchResult(url)
+        // axios.get(url)
+        // .then(response => this.setState({ answers: response.data }));
+
+        // this.setState({
+        //     value: '',
+        //     answers: []
+        // })
+    };
+    // useEffect(() => {
+    //     getSearchResult()
+    // }, [])
+    return (
+        <div class="container">
+            <h1 style={{color:'#fff', marginTop:'15%', marginRight:'70%'}}>Find Pipl</h1>
+
+        <div class="data-container">
+                <span class="btn" onClick={handleSubmit}>Search</span>
+        </div>
+        <input type="text" onChange={handleChange} placeholder="Search Name"/>
+        <div class="search"></div>
+        <Post answers={searchResults} />
+        </div>
+    )
+}
+
+const Post = props =>
+	<div>
+    {props.searchResults.map((items, index) =>
+        <div className='app-post' key={index}>
+          <a href={items.url}
+             className='app-post__title'
+             target='_blank'>{items.author}</a>
+          <p className='app-post__extract'>{items.title}</p>
+        </div>
+    )}
+  </div>;
+
+
+
+const mapStateToProps = state => {
+    return{
+        searchResults : state.hits
+    }
+}
+
+const mapDispatchToProps = dispatch => {
+
+    return{
+        getSearchResult: () => dispatch(getSearchResult())
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps) (SearchPage)
