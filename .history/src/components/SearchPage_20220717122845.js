@@ -1,4 +1,4 @@
-import React,{useEffect, useState} from "react";
+import React,{useEffect, useState, useRef} from "react";
 import {connect} from 'react-redux';
 import { getSearchResult } from "../actions";
 import ResultDescriptionPage from "./ResultDescriptionPage";
@@ -9,6 +9,9 @@ function SearchPage({searchResults,message, getSearchResult}){
     const [text, setText] = useState();
     const [isDescriptionShown, setIsDescriptionShown] = useState(false);
     const [postUrl, setPostUrl] = useState("");
+    const myRef = useRef(null)
+
+    const executeScroll = () => myRef.current.scrollIntoView()   
 
     const Post = props =>
 	<div>
@@ -38,6 +41,7 @@ function SearchPage({searchResults,message, getSearchResult}){
         event.preventDefault();
         const url = "https://hn.algolia.com/api/v1/search?query=" + text;
         getSearchResult(url);
+        executeScroll
 
     };
 

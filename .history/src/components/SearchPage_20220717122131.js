@@ -15,7 +15,7 @@ function SearchPage({searchResults,message, getSearchResult}){
     {props?.searchResults?.length > 0 ? 
     <div>
          {props?.searchResults?.map((items, index) =>
-        <div className='app-post' style={{cursor:"pointer"}} key={index} onClick={ () => handleClick(items.objectID)}>
+        <div className='app-post' key={index} onClick={ () => handleClick(items.objectID)}>
           <a href={items.url}
              className='app-post__title'
              target='_blank'>{items.author}</a>

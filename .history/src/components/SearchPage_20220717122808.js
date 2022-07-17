@@ -9,7 +9,10 @@ function SearchPage({searchResults,message, getSearchResult}){
     const [text, setText] = useState();
     const [isDescriptionShown, setIsDescriptionShown] = useState(false);
     const [postUrl, setPostUrl] = useState("");
+    const myRef = useRef(null)
 
+    const executeScroll = () => myRef.current.scrollIntoView()   
+    
     const Post = props =>
 	<div>
     {props?.searchResults?.length > 0 ? 
