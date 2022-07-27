@@ -1,0 +1,14 @@
+.balance_container{
+    width: 100%;
+    height: 50px;
+    text-align: start;
+    background-color: #2855F6;
+}
+
+h2{
+    margin-top: 5%;
+    padding-top: 10px;
+    margin-left: 2%;
+    color: aliceblue;
+    /* margin:5%; */
+}
